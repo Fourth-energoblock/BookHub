@@ -1,0 +1,120 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\geometry{margin=2.5cm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Правила работы с репозиторием}
+\fancyhead[R]{Проект «BookHub»}
+\fancyfoot[C]{\thepage}
+
+\title{\textbf{Правила работы с репозиторием проекта "BookHub"}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\vspace{1cm}
+
+Этот документ описывает основные правила и процессы, принятые в команде "Fourth energoblock" для работы с данным репозиторием. Соблюдение этих правил обязательно для всех участников проекта.
+
+\section{Общий процесс внесения изменений}
+
+Любые изменения — будь то добавление документации, исправление ошибок или любая другая задача — должны вноситься через \textbf{Pull Request (PR)}. Прямые коммиты в ветку \texttt{main} \textbf{запрещены} настройками репозитория.
+
+\textbf{Порядок действий для каждого участника:}
+
+\begin{enumerate}
+    \item \textbf{Синхронизация:} Перед началом любой работы убедитесь, что ваша локальная ветка \texttt{main} содержит самые последние изменения с GitHub.
+    \begin{lstlisting}[language=bash]
+    git checkout main
+    git pull origin main
+    \end{lstlisting}
+
+    \item \textbf{Создание новой ветки:} Для каждой новой задачи создавайте отдельную ветку от \texttt{main}. Название ветки должно соответствовать правилам именования (см. раздел 2).
+    \begin{lstlisting}[language=bash]
+    git checkout -b <nazvanie-vashej-vetki>
+    \end{lstlisting}
+
+    \item \textbf{Работа над задачей:} Внесите необходимые изменения в файлы проекта.
+
+    \item \textbf{Коммиты:} Сделайте один или несколько коммитов, чтобы сохранить ваши изменения. Сообщения коммитов должны соответствовать принятому стилю (см. раздел 3).
+    \begin{lstlisting}[language=bash]
+    git add .
+    git commit -m "tip: kratkoe opisanie vashih izmenenij"
+    \end{lstlisting}
+
+    \item \textbf{Отправка на GitHub:} Отправьте вашу ветку с коммитами в удаленный репозиторий.
+    \begin{lstlisting}[language=bash]
+    git push origin <nazvanie-vashej-vetki>
+    \end{lstlisting}
+
+    \item \textbf{Создание Pull Request:} На сайте GitHub появится предложение создать Pull Request из вашей ветки. Нажмите на него.
+    \begin{itemize}
+        \item \textbf{Целевая ветка:} \texttt{main}.
+        \item \textbf{Название PR:} Кратко и понятно опишите суть всех изменений.
+        \item \textbf{Reviewers:} В правой панели назначьте всех остальных участников команды для проверки вашего кода.
+    \end{itemize}
+\end{enumerate}
+
+\section{Правила именования веток}
+
+Название ветки должно давать понять, над какой задачей ведется работа. Мы используем следующие префиксы:
+
+\begin{itemize}
+    \item \texttt{feature/} — для создания новых артефактов или добавления крупных блоков информации (например, \texttt{feature/create-questionnaire}).
+    \item \texttt{docs/} — для обновления документации (например, \texttt{docs/update-contribution-guide}).
+    \item \texttt{fix/} — для исправления ошибок или опечаток (например, \texttt{fix/correct-typos-in-readme}).
+\end{itemize}
+
+\textbf{Пример правильного названия:} \texttt{feature/add-communication-plan}
+
+\section{Стиль именования коммитов}
+
+Мы придерживаемся стандарта \textbf{Conventional Commits}. Это помогает нам поддерживать историю изменений чистой и понятной, а также в будущем позволит автоматизировать создание отчетов об изменениях.
+
+\textbf{Формат сообщения:} \texttt{<тип>: <краткое описание>}
+
+\textbf{Основные типы:}
+\begin{itemize}
+    \item \textbf{feat}: Добавление нового файла-артефакта или раздела в документ.
+    \item \textbf{docs}: Изменения, касающиеся только документации (например, обновление \texttt{README.md} или этого файла).
+    \item \textbf{fix}: Исправление опечаток, ошибок в форматировании.
+    \item \textbf{style}: Изменения, не влияющие на содержание (пробелы, форматирование и т.д.).
+\end{itemize}
+
+\textbf{Примеры сообщений:}
+\begin{itemize}
+    \item \texttt{feat: Add initial draft of meeting protocol}
+    \item \texttt{docs: Describe branch naming rules}
+    \item \texttt{fix: Correct contact info in communication plan}
+\end{itemize}
+
+\section{Система одобрений (Approve'ов)}
+
+Для обеспечения высокого качества нашей работы и общего понимания процесса, каждое изменение должно быть проверено командой.
+
+\begin{itemize}
+    \item \textbf{Правило:} Для слияния Pull Request в ветку \texttt{main} необходимо получить \textbf{одобрение (Approve)} от всех остальных участников команды.
+    \item \textbf{Расчет:} Так как в нашей команде 5 человек, для слияния PR необходимо получить \textbf{4 одобрения}.
+    \item \textbf{Ограничение:} Автор Pull Request'а не может одобрить собственный PR.
+\end{itemize}
+
+\textbf{Процесс ревью:}
+\begin{enumerate}
+    \item После создания PR автор запрашивает ревью у всех членов команды.
+    \item Ревьюеры просматривают изменения, оставляют комментарии, если есть вопросы или замечания.
+    \item Если изменения соответствуют требованиям, ревьюер ставит "Approve".
+    \item После получения 4-х одобрений PR может быть успешно слит в \texttt{main}.
+\end{enumerate}
+
+\end{document}

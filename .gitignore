@@ -1,0 +1,10 @@
+# Ignore all files except .md, .tex, and .pdf
+*
+
+# But keep .md, .tex, and .pdf files
+!*.md
+!*.tex
+!*.pdf
+
+# Also keep directories
+!*/
